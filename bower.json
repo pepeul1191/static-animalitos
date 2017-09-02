@@ -31,6 +31,6 @@
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
     "requirejs": "^2.3.4",
-    "jasmine-core": "jasmine#^2.8.0"
+    "qunit": "^2.1.1"
   }
 }

@@ -30,8 +30,8 @@ var FormRegistroView = Backbone.View.extend({
 		var usuario_valido_valor;
      	$.ajax({
      		type: "POST",
-     		url: BASE_URL + "registro/validar_usuario_repetido",
-     		data: "nombre=" + $("#txtUsuario").val(),
+     		url: BASE_URL + "registro/validar_usuario_repetido?nombre=" + $("#txtUsuario").val(),
+     		data: '',
      		async: false,
      		success: function(data){
      			if(data >= 1){
@@ -46,7 +46,7 @@ var FormRegistroView = Backbone.View.extend({
      		},
      		error: function(data){
      			//FALTA MANEJAR EL ERROR DEL AJAX
-     		}
+			 }
      	});
      	this.model.set({usuario_valido : usuario_valido_valor});
 	},

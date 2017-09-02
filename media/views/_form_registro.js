@@ -67,8 +67,8 @@ var FormRegistroView = Backbone.View.extend({
 		var correo_valido_valor;
      	$.ajax({
      		type: "POST",
-     		url: BASE_URL + "registro/validar_correo_repetido",
-     		data: "correo=" + $("#txtCorreo").val(),
+     		url: BASE_URL + "registro/validar_correo_repetido?correo=" + $("#txtCorreo").val(),
+     		data: "",
      		async: false,
      		success: function(data){
      			if(data >= 1){

@@ -2,7 +2,7 @@ QUnit.module( "Llenar Formulario de Registro", {
 	beforeEach: function() {
 		this.input_nombre_usuario = $("#txtUsuario");
 		this.input_correo_usuario = $("#txtCorreo");
-		this.id_tabla = "#tablaAlumno";
+        this.input_correo_usuario_repetido = $("#txtCorreoRepetir");
 	}
 });
 
@@ -65,4 +65,36 @@ QUnit.test( "Buscar 'correo de usuario' - No Repetido", function( assert ) {
         var mensaje_error_generado = this.input_correo_usuario.parent().find("span").html();
         var mensaje_error_esperado = "";
         assert.equal(mensaje_error_generado, mensaje_error_esperado, "No existe mensaje de error de correo de usuario repetido");
+});
+
+QUnit.test( "Repetir correo coincide", function( assert ) {
+		this.input_correo_usuario_repetido.val('jvaldivia@softweb.pe');
+        this.input_correo_usuario_repetido.focusout();
+		var usuario = new Usuario();
+		var formRegistro = new FormRegistroView({model:usuario});
+		formRegistro.validarCorreoIgual();
+		assert.equal((usuario.get("correo_valido")), false, "Los correos ingresados no coinciden");
+    
+       var mensaje_class = this.input_correo_usuario_repetido.parent().hasClass("has-error");
+        assert.equal(mensaje_class, true, "Mensaje de error de correo repetido  de usuario tiene clase 'has-error'");
+    
+        var mensaje_error_generado = this.input_correo_usuario_repetido.parent().find("span").html();
+        var mensaje_error_esperado = "El correo ingresado no coincide con el primero";
+        assert.equal(mensaje_error_generado, mensaje_error_esperado, "Mensaje de error de correo repetido de usuario repetido no tiene el contenido esperado");
+});
+
+QUnit.test( "Repetir correo no coincide", function( assert ) {
+		this.input_correo_usuario_repetido.val('jvaldivia@softweb.pex');
+        this.input_correo_usuario_repetido.focusout();
+		var usuario = new Usuario();
+		var formRegistro = new FormRegistroView({model:usuario});
+		formRegistro.validarCorreoIgual();
+		assert.equal((usuario.get("correo_valido")), true, "Los correos ingresados coinciden");
+    
+       var mensaje_class = this.input_correo_usuario_repetido.parent().hasClass("has-error");
+        assert.equal(mensaje_class, false, "Mensaje de error de correo repetido  de usuario no tiene clase 'has-error'");
+    
+        var mensaje_error_generado = this.input_correo_usuario_repetido.parent().find("span").html();
+        var mensaje_error_esperado = "";
+        assert.equal(mensaje_error_generado, mensaje_error_esperado, "No hay mensaje de error de correo repetido de usuario repetido no tiene el contenido esperado");
 });

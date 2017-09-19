@@ -2,7 +2,10 @@ QUnit.module( "Llenar Formulario de Registro", {
 	beforeEach: function() {
 		this.input_nombre_usuario = $("#txtUsuario");
 		this.input_correo_usuario = $("#txtCorreo");
-        this.input_correo_usuario_repetido = $("#txtCorreoRepetir");
+		this.input_correo_usuario_repetido = $("#txtCorreoRepetir");
+		this.input_correo_usuario_repetido = $("#txtCorreoRepetir");
+		this.input_correo_contrasenia = $("#txtContrasenia");
+		this.input_correo_contrasenia_repetido = $("#txtContraseniaRepetir");
 	}
 });
 
@@ -97,4 +100,41 @@ QUnit.test( "Repetir correo no coincide", function( assert ) {
         var mensaje_error_generado = this.input_correo_usuario_repetido.parent().find("span").html();
         var mensaje_error_esperado = "";
         assert.equal(mensaje_error_generado, mensaje_error_esperado, "No hay mensaje de error de correo repetido de usuario repetido no tiene el contenido esperado");
+});
+
+QUnit.test( "Repetir contraseña coincide", function( assert ) {
+	this.input_correo_contrasenia.val('123456');
+	this.input_correo_contrasenia_repetido.val('123456');
+	this.input_correo_contrasenia_repetido.focusout();
+	var usuario = new Usuario();
+	var formRegistro = new FormRegistroView({model:usuario});
+	formRegistro.validarContraseniaIgual();
+	assert.equal((usuario.get("contrasenia_valido")), true, "Las contraseñas ingresadas coinciden");
+
+   var mensaje_class = this.input_correo_usuario_repetido.parent().hasClass("has-error");
+	assert.equal(mensaje_class, false, "Mensaje de error de contraseña repetida no tiene clase 'has-error'");
+
+	var mensaje_error_generado = this.input_correo_usuario_repetido.parent().find("span").html();
+	var mensaje_error_esperado = "";
+	assert.equal(mensaje_error_generado, mensaje_error_esperado, "No hay mensaje de error de contraseña repetida, no tiene contenido esperado");
+});
+
+
+QUnit.test( "Repetir contraseña no coincide", function( assert ) {
+	//this.input_correo_contrasenia = $("#txtContrasenia");
+	//this.input_correo_contrasenia_repetido = $("#txtContraseniaRepetir");
+	this.input_correo_contrasenia.val('123456');
+	this.input_correo_contrasenia_repetido.val('1234567');
+	this.input_correo_contrasenia_repetido.focusout();
+	var usuario = new Usuario();
+	var formRegistro = new FormRegistroView({model:usuario});
+	formRegistro.validarContraseniaIgual();
+	assert.equal((usuario.get("contrasenia_valido")), false, "Las contraseñas ingresadas no coinciden");
+
+   var mensaje_class = this.input_correo_contrasenia_repetido.parent().hasClass("has-error");
+	assert.equal(mensaje_class, true, "Mensaje de error de contraseña repetida tiene clase 'has-error'");
+
+	var mensaje_error_generado = this.input_correo_contrasenia_repetido.parent().find("span").html();
+	var mensaje_error_esperado = "La contraseña ingresada no coincide con la primera";
+	assert.equal(mensaje_error_generado, mensaje_error_esperado, "Hay mensaje de error de contraña repetida, tiene contenido esperado");
 });

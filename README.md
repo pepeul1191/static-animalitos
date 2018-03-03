@@ -2,26 +2,19 @@
 
 Requisitos de software previamente instalado:
 
-	+ Python 2.7
-	+ Python PIP
-	+ NodeJS - NPM - Gulp
++ NodeJS - NPM - Gulp - Bower
 
 Instalación de dependencias:
 
-	$ sudo pip install -r requirements.txt && npm install && bower install 
+		$ npm install && bower install
 
 ### Generar 'dist'
-	
-	$ gulp layout && gulp app && gulp error-css
 
-Comandos de DJango
+		$ gulp layout && gulp app && gulp error-css
 
-	$ django-admin startproject mysite
-	$ python manage.py startapp polls
-	$ sudo pip install -r requirements.txt
-	$ python manage.py runserver 192.168.1.9:8080
-	$ python manage.py makemigrations libros
-	$ python manage.py migrate
+Arrancar servidor de desarrollo Express:
+
+		$ npm start
 
 ### Fuentes externas de vistas HTML:
 
@@ -30,6 +23,7 @@ Comandos de DJango
 + Contacto : https://bootsnipp.com/snippets/zD4p9
 + Footer : https://bootsnipp.com/snippets/GQmaP
 + Error404 : https://bootsnipp.com/snippets/OeKdM
++ https://github.com/pepeul1191/static-file-server-boilerplate
 
 ### TODO
 

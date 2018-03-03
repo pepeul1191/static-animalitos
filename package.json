@@ -5,11 +5,15 @@
     "author": "Pepe Valdivia <jvaldivia@softweb.pe>",
     "description": "Aprendiendo a usar GULP",
     "license": "MIT",
+    "scripts": {
+      "start": "node server.js"
+    },
     "engines": {
         "node": ">=0.10"
     },
     "dependencies": {
-        "express": "~3.4.7",
+        "express": "^4.16.2",
+        "morgan": "^1.9.0",
         "gulp-livereload": "^3.8.1",
         "handlebars": "^4.0.10",
         "json-lint": "~0.1.0"
